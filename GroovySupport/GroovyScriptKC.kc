@@ -1,0 +1,7 @@
+boolean startCallingMethods=false ;
+dontRunMethods=["phaseSupport","main"]; // methods to ignore while running the script
+ for(String mymeth : groovyObject.metaClass.methods*.name.unique()- dontRunMethods ) {
+ 	if(startCallingMethods) tempArray.add(groovyObject."$mymeth"(argPw)); // start calling methods only after setBinding is encountered in the list of methods	
+ 	  if(mymeth.equals("setBinding"))startCallingMethods=true; // methods from the groovy file seem to come only after the setBinding method in the list 
+ 		//println mymeth;
+ }
